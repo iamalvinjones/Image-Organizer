@@ -1,0 +1,76 @@
+<?php
+
+/*
+ * Plugin Name: Services Page Name Replace
+ * Plugin URI: https://saafebhs.com/services
+ * Description: This plugin searches for the services page and replaces every H4 in alphabetical order with the names of the list.
+ * Version: 1.0
+ * Author: Saafe Behavioral Services
+ * Author URI: https://saafebhs.com
+ * License: GPL2
+ */
+
+function replace_services_page_names() {
+  if ( is_page( 'services' ) ) {
+    $names_list = [
+      'Adriana Carreno',
+      'Altamese Miller',
+      'Ashlea Crawford',
+      'Christian Giovanniello',
+      'Credentialing/Compl',
+      'Deidra Jacobs Manning',
+      'Edna Casanova',
+      'Elisha Moales',
+      'HR/Compliance',
+      'Jose Vera',
+      'Lauren Hanna',
+      'Lead Therapist',
+      'Lucy Alamos',
+      'Marjan Naghavi',
+      'Marlene Toussaint',
+      'Mariel Johnson',
+      'Morgan Thomas',
+      'Nathalia DiBenardo',
+      'Operations Manager',
+      'Rachel Szafranski',
+      'Steven Littleton',
+      'Tanya Allen',
+      'Tiffany Altman',
+      'Tracy Greene',
+      'Whidden Flores',
+      'Yesmarie Alfonso',
+      'Alexis Williams',
+      'Anwar Chowdhury',
+      'Billing Supervisor',
+      'CFO',
+      'Chantiel Whitted',
+      'Kanisha Miller',
+      'Monica Killins',
+      'Christie Cain',
+      'Carmen Sanz',
+      'Abisoye Somorin'
+    ];
+
+    $names_list = array_map( 'strtolower', $names_list );
+    sort( $names_list );
+
+    $h4_elements = document.getElementsByTagName( 'h4' );
+
+    for ( $i = 0; $i < count( $h4_elements ); $i++ ) {
+      $h4_elements[$i].innerHTML = $names_list[$i];
+    }
+  }
+}
+
+add_action( 'wp_footer', 'replace_services_page_names' );
+for ( $i = 0; $i < count( $h4_elements ); $i++ ) {
+$name_parts = explode( ',', $names_list[$i] );
+$first_name = trim( $name_parts[0] );
+$last_name = trim( $name_parts[1] );
+$h4_elements[$i]->innerHTML = "$first_name $last_name";
+}
+}
+}
+add_action( 'wp_footer', 'replace_services_page_names' );
+
+?>
